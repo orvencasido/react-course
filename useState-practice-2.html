@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>useState 2</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+
+    function CounterWithLabel() {
+      const [count, setCount] = React.useState(0);
+
+      function counter() {
+        setCount(count + 1);
+      }
+
+      function counterMinus() {
+        setCount(count - 1);
+
+        if (count - 1 < 0) {
+          setCount(0);
+        }
+      }
+
+      function statusIdentify() {
+        if (count === 0) {
+          return "Start Clicking"
+        } else if (count < 10) {
+          return "You are Active"
+        } else {
+          return "Heavy User!"
+        }
+      }
+
+      return (
+        <div style={{ marginTop: "20px" }}>
+          <div>{count}</div>
+          <button onClick={counter}>+1</button>
+          <button onClick={counterMinus}>-1</button>
+          <p>{statusIdentify()}</p>
+        </div>
+      );
+    }
+
+    function Like() {
+      const [like, setLike] = React.useState(true);
+
+      return (
+        <div>
+          <button onClick={() => setLike(!like)}>{like ? ("Like") : ("Unlike")}</button>
+        </div>
+      );
+    }
+
+    // function InputUser() {
+    //   const [name, setName] = React.useState("");
+    //   const [submit, setSubmit] = React.useState("");
+
+    //   function typing(e) {
+    //     console.log(e.target.value);
+    //     setName(e.target.value);
+    //   }
+
+    //   function submitText() {
+    //     setSubmit(name);
+    //   }
+
+    //   return (
+    //     <div>
+    //       <input onChange={typing} type="text" />
+    //       <button onClick={submitText}>Submit</button>
+    //       <p>{submit()}</p>
+    //     </div>
+    //   );
+    // }
+
+
+    function Toggle() {
+      const [toggle, setToggle] = React.useState(true);
+
+      return (
+        <div style={{ marginBottom: "20px" }}>
+          <p>{toggle.toString()}</p>
+          <button onClick={() => setToggle(!toggle)}>Toggle</button>
+        </div>
+      );
+    }
+
+    function Counter() {
+      const [count, setCount] = React.useState(0);
+
+      return (
+        <div>
+          <div>{count}</div>
+          <button onClick={() => setCount(count + 1)}>+1</button>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <Counter />
+          <Toggle />
+          <Like />
+          <CounterWithLabel />
+        </>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+
+  </script>
+</body>
+
+</html>
