@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React Counter</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+  <script type="text/babel">
+    function Counter() {
+      const [time, setTime] = React.useState(dayjs().format('HH:mm:ss'));
+
+      React.useEffect(() => {
+        setInterval(() => {
+          const timer = setTime(dayjs().format('HH:mm:ss'));
+        }, 1000);
+
+        return () => clearInterval(timer)
+      }, []);
+
+      return (
+        <>
+          <p>{time}</p>
+          {console.log(time)}
+        </>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Counter />
+        </div>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

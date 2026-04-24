@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exercise 2 React with CSS</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input {
+      width: 200px;
+      margin-bottom: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      border-radius: 5px;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    input::placeholder {
+      font-size: 12px;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      background-color: rgb(0, 123, 255);
+      border-style: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      margin-right: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .title {
+      font-size: 20px;
+    }
+
+    .show-btn {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+    function LoginContainer() {
+      const [pass, setPass] = React.useState(true);
+
+      function toggleBtn() {
+        if (!pass) {
+          setPass(true);
+        } else {
+          setPass(false);
+        }
+      }
+
+      return (
+        <div>
+          <div>
+            <p className="title">Hello, welcome to my Website</p>
+          </div>
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Email"
+            />
+            <div>
+              <input
+                type={pass ? ("password") : ("text")}
+                placeholder="Password"
+              />
+              <button
+                onClick={toggleBtn}
+                className="show-btn">
+                Show</button>
+            </div>
+          </div>
+          <div className="btn-container">
+            <button className="btn">Login</button>
+            <button className="btn">Sign Up</button>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <LoginContainer />
+        </div>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

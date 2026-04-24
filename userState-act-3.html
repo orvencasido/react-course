@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>useState Act 3</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+    function InputText() {
+      const [text, setText] = React.useState("");
+
+      function displayText(e) {
+        return setText(e.target.value)
+      }
+
+      function resetText() {
+        return setText("");
+      }
+
+      function exampleText() {
+        return setText("Orven");
+      }
+
+      return (
+        <div>
+          <input
+            value={text}
+            onChange={displayText}
+            type="text"
+            placeholder="Type a name here"
+          />
+          <button
+            onClick={resetText}
+          >Reset
+          </button>
+          <button
+            onClick={exampleText}
+          >Example
+          </button>
+          <p>Hello {text}</p>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <InputText />
+        </div>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />); 
+  </script>
+</body>
+
+</html>

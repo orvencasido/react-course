@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>useState</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+    function ResetButton({ setCounter }) {
+      function resetCounter() {
+        setCounter(0);
+      }
+
+      return (
+        <>
+          <button onClick={resetCounter}>Reset</button>
+        </>
+      );
+    }
+
+    function Button({ counter, setCounter }) {
+      function updateCounter() {
+        setCounter(counter + 1);
+      }
+
+      function checkCounter() {
+        if (counter === 0) {
+          return `Clicked 0 Time`
+        } else {
+          return `Clicked ${counter} Times`;
+        }
+      }
+
+      return (
+        <>
+          <button onClick={updateCounter}> {checkCounter()}</button>
+        </>
+      );
+    }
+
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+
+      return (
+        <div>
+          <Button counter={counter} setCounter={setCounter} />
+          <Button counter={counter} setCounter={setCounter} />
+          <ResetButton setCounter={setCounter} />
+        </div>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

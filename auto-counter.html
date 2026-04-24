@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+  <script type="text/babel">
+    function Counter() {
+      const [click, setClick] = React.useState(0);
+      const [running, setRunning] = React.useState(false);
+
+      function addCount() {
+        setClick(click + 1);
+      }
+
+      function resetCount() {
+        setClick(0);
+      }
+
+      React.useEffect(() => {
+        if (!running) return;
+
+        const auto = setInterval(() => {
+          setClick(click => click + 1);
+        }, 500);
+        return () => clearInterval(auto);
+      }, [running])
+
+      return (
+        <>
+          <button onClick={addCount}>Clicked {click} Times</button>
+          <button onClick={resetCount}>Reset</button >
+          <button onClick={() => setRunning(true)}>Auto Click</button>
+          <button onClick={() => setRunning(false)}>Stop Click</button>
+        </>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <Counter />
+        </>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  </script>
+</body>
+
+</html>
